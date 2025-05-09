@@ -15,11 +15,11 @@ const Footer: React.FC = () => {
             <Link to="/" className="flex items-center gap-2 mb-4">
               <img 
                 src="/lovable-uploads/79e5e0d0-2085-4cf4-89f5-93195b5fa831.png" 
-                alt="EqwaBlue Logo" 
+                alt="EqwaBlu Logo" 
                 className="h-10" 
               />
               <span className="font-bold text-xl text-white">
-                EqwaBlue
+                EqwaBlu
               </span>
             </Link>
             <p className="text-eqwablue-silver mb-4">
@@ -76,17 +76,16 @@ const Footer: React.FC = () => {
               <li className="flex items-start">
                 <MapPin className="mr-2 h-5 w-5 text-eqwablue-aqua flex-shrink-0" />
                 <span className="text-eqwablue-silver">
-                  123 Science Park, Innovation District<br/>
-                  San Francisco, CA 94107
+                  India, Asia<br/>
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5 text-eqwablue-aqua flex-shrink-0" />
-                <span className="text-eqwablue-silver">+1 (555) 123-4567</span>
+                <span className="text-eqwablue-silver">TBD</span>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-eqwablue-aqua flex-shrink-0" />
-                <span className="text-eqwablue-silver">info@eqwablue.com</span>
+                <span className="text-eqwablue-silver">eqwablu@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -96,7 +95,7 @@ const Footer: React.FC = () => {
         
         {/* Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center text-eqwablue-silver">
-          <p>© {currentYear} EqwaBlue. All rights reserved.</p>
+          <p>© {currentYear} EqwaBlu. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="hover:text-eqwablue-aqua">Privacy Policy</Link>
             <Link to="/terms-of-service" className="hover:text-eqwablue-aqua">Terms of Service</Link>
