@@ -7,17 +7,38 @@ import { motion } from "framer-motion";
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
+    // Enhanced mouse movement effect
     const handleMouseMove = (e: MouseEvent) => {
-      if (heroRef.current) {
-        const { left, top, width, height } = heroRef.current.getBoundingClientRect();
-        const x = (e.clientX - left) / width - 0.5;
-        const y = (e.clientY - top) / height - 0.5;
-        
-        heroRef.current.style.setProperty('--x-offset', `${x * 20}px`);
-        heroRef.current.style.setProperty('--y-offset', `${y * 20}px`);
+      if (!heroRef.current) return;
+      
+      const { left, top, width, height } = heroRef.current.getBoundingClientRect();
+      const x = (e.clientX - left) / width - 0.5;
+      const y = (e.clientY - top) / height - 0.5;
+      
+      // Apply parallax effect to heading
+      if (headingRef.current) {
+        headingRef.current.style.transform = `translateY(${y * 30}px) translateX(${x * 30}px)`;
       }
+      
+      // Apply effect to particles
+      if (particlesRef.current) {
+        const particles = particlesRef.current.children;
+        for (let i = 0; i < particles.length; i++) {
+          const particle = particles[i] as HTMLElement;
+          const speed = parseFloat(particle.dataset.speed || "1");
+          const xPos = x * 50 * speed;
+          const yPos = y * 50 * speed;
+          particle.style.transform = `translate(${xPos}px, ${yPos}px)`;
+        }
+      }
+      
+      // Apply ripple effect on water background
+      const rippleStrength = 5;
+      heroRef.current.style.backgroundPosition = `${x * rippleStrength}px ${y * rippleStrength}px`;
     };
     
     document.addEventListener('mousemove', handleMouseMove);
@@ -43,6 +64,7 @@ const Hero: React.FC = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" }}
   };
 
+  // Enhanced bubble animations
   const bubbleVariants = {
     hidden: { opacity: 0, scale: 0 },
     visible: (i: number) => ({
@@ -53,7 +75,14 @@ const Hero: React.FC = () => {
         duration: 1,
         ease: "easeOut"
       }
-    })
+    }),
+    hover: {
+      scale: 1.2,
+      opacity: 0.2,
+      transition: {
+        duration: 0.3
+      }
+    }
   };
 
   return (
@@ -64,31 +93,38 @@ const Hero: React.FC = () => {
         backgroundImage: "linear-gradient(135deg, rgba(0, 51, 102, 0.9), rgba(0, 183, 194, 0.8))",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        transition: "background-position 0.1s ease-out"
       }}
     >
-      {/* Dynamic particles/bubbles background */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            custom={i}
-            variants={bubbleVariants}
-            initial="hidden"
-            animate="visible"
-            className="absolute rounded-full bg-white"
-            style={{
-              width: `${Math.random() * 100 + 50}px`,
-              height: `${Math.random() * 100 + 50}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `float ${Math.random() * 10 + 5}s infinite ease-in-out`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
-        ))}
+      {/* Dynamic particles/bubbles background with mouse interaction */}
+      <div ref={particlesRef} className="absolute inset-0 z-0">
+        {[...Array(20)].map((_, i) => {
+          const speed = Math.random() * 0.8 + 0.2;
+          return (
+            <motion.div
+              key={i}
+              custom={i}
+              variants={bubbleVariants}
+              initial="hidden"
+              animate="visible"
+              whileHover="hover"
+              data-speed={speed}
+              className="absolute rounded-full bg-white cursor-pointer"
+              style={{
+                width: `${Math.random() * 100 + 50}px`,
+                height: `${Math.random() * 100 + 50}px`,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animation: `float ${Math.random() * 10 + 5}s infinite ease-in-out`,
+                animationDelay: `${Math.random() * 5}s`,
+                transition: "transform 0.2s ease-out"
+              }}
+            />
+          );
+        })}
       </div>
       
-      {/* Wave pattern overlay */}
+      {/* Animated wave overlay */}
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -105,10 +141,10 @@ const Hero: React.FC = () => {
         animate="visible"
       >
         <motion.h1 
+          ref={headingRef}
           className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8"
           style={{
             textShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
-            transform: "translateY(var(--y-offset, 0)) translateX(var(--x-offset, 0))",
             transition: "transform 0.1s ease-out",
           }}
           variants={itemVariants}
@@ -128,28 +164,43 @@ const Hero: React.FC = () => {
           className="flex flex-col sm:flex-row justify-center gap-4"
           variants={itemVariants}
         >
-          <Button 
-            asChild
-            size="lg" 
-            className="bg-eqwablue-aqua hover:bg-white hover:text-eqwablue-deepBlue text-eqwablue-deepBlue font-semibold px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+          <motion.div
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)" }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <Link to="/solutions" className="flex items-center">
-              Explore Solutions <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
+            <Button 
+              asChild
+              size="lg" 
+              className="bg-eqwablue-aqua hover:bg-white hover:text-eqwablue-deepBlue text-eqwablue-deepBlue font-semibold px-8 rounded-lg shadow-lg transition-all duration-300"
+            >
+              <Link to="/solutions" className="flex items-center">
+                Explore Solutions <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </motion.div>
           
-          <Button 
-            asChild
-            size="lg" 
-            variant="outline" 
-            className="border-white text-white hover:bg-white hover:text-eqwablue-deepBlue font-semibold px-8 rounded-lg transition-all duration-300"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <Link to="/contact">
-              Contact Us
-            </Link>
-          </Button>
+            <Button 
+              asChild
+              size="lg" 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-eqwablue-deepBlue font-semibold px-8 rounded-lg transition-all duration-300"
+            >
+              <Link to="/contact">
+                Contact Us
+              </Link>
+            </Button>
+          </motion.div>
         </motion.div>
       </motion.div>
+
+      {/* Mouse cursor spotlight effect */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-radial z-0 opacity-30"></div>
     </section>
   );
 };
