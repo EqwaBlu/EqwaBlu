@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Shield, Droplets, Building, Flask } from "lucide-react";
+import { Shield, Droplets, Building, FlaskConical } from "lucide-react";
 
 interface SolutionCardProps {
   title: string;
@@ -81,7 +81,7 @@ const SolutionsSection: React.FC = () => {
     {
       title: "EqwaBlue Flux™",
       description: "Industrial additive for large-scale water treatment facilities and environmental remediation.",
-      icon: <Flask className="h-6 w-6" />,
+      icon: <FlaskConical className="h-6 w-6" />,
       color: "bg-cyan-500",
     },
   ];
