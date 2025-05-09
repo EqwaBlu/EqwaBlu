@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    document.title = "Contact Us | EqwaBlue - Advanced Methylene Blue Water Solutions";
+    document.title = "Contact Us | EqwaBlu - Advanced Methylene Blue Water Solutions";
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -69,22 +69,22 @@ const Contact: React.FC = () => {
     {
       icon: MapPin,
       title: "Headquarters",
-      details: ["1234 Innovation Way", "San Francisco, CA 94103", "United States"]
+      details: ["India, Asia"]
     },
     {
       icon: Phone,
       title: "Phone",
-      details: ["+1 (800) 123-4567", "+1 (415) 987-6543"]
+      details: ["TBD"]
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["info@eqwablue.com", "support@eqwablue.com"]
+      details: ["eqwablu@gmail.com"]
     },
     {
       icon: Building,
       title: "International Offices",
-      details: ["London • Singapore", "Dubai • Tokyo"]
+      details: ["Asia"]
     }
   ];
 
@@ -109,7 +109,7 @@ const Contact: React.FC = () => {
       <Navbar />
       <main className="flex-grow pt-24">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-eqwablue-deepBlue to-blue-900 text-white py-20">
+        <section className="bg-gradient-to-br from-EqwaBlu-deepBlue to-blue-900 text-white py-20">
           <motion.div 
             className="container mx-auto px-4 text-center"
             variants={containerVariants}
@@ -138,7 +138,7 @@ const Contact: React.FC = () => {
               {/* Contact Information */}
               <div>
                 <motion.h2 
-                  className="text-2xl font-semibold text-eqwablue-deepBlue mb-6"
+                  className="text-2xl font-semibold text-EqwaBlu-deepBlue mb-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
@@ -158,7 +158,7 @@ const Contact: React.FC = () => {
                       className="flex items-start gap-4"
                       variants={itemVariants}
                     >
-                      <div className="p-3 rounded-full bg-eqwablue-aqua/10 text-eqwablue-aqua mt-1">
+                      <div className="p-3 rounded-full bg-EqwaBlu-aqua/10 text-EqwaBlu-aqua mt-1">
                         <item.icon className="h-6 w-6" />
                       </div>
                       <div>
@@ -177,7 +177,7 @@ const Contact: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  <h3 className="font-semibold text-eqwablue-deepBlue mb-3">Business Hours</h3>
+                  <h3 className="font-semibold text-EqwaBlu-deepBlue mb-3">Business Hours</h3>
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Monday - Friday:</span>
@@ -202,7 +202,7 @@ const Contact: React.FC = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="bg-white p-8 rounded-xl shadow-sm border border-gray-100"
               >
-                <h2 className="text-2xl font-semibold text-eqwablue-deepBlue mb-6">Send Us a Message</h2>
+                <h2 className="text-2xl font-semibold text-EqwaBlu-deepBlue mb-6">Send Us a Message</h2>
                 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-4">
@@ -283,13 +283,13 @@ const Contact: React.FC = () => {
                       htmlFor="consent"
                       className="text-sm text-gray-600 leading-tight"
                     >
-                      I consent to EqwaBlue storing my submitted information so they can respond to my inquiry.
+                      I consent to EqwaBlu storing my submitted information so they can respond to my inquiry.
                     </Label>
                   </div>
                   
                   <Button 
                     type="submit" 
-                    className="bg-eqwablue-deepBlue hover:bg-eqwablue-aqua w-full transition-all duration-200"
+                    className="bg-EqwaBlu-deepBlue hover:bg-EqwaBlu-aqua w-full transition-all duration-200"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -316,7 +316,7 @@ const Contact: React.FC = () => {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <motion.h2 
-              className="text-2xl font-semibold text-eqwablue-deepBlue mb-8 text-center"
+              className="text-2xl font-semibold text-EqwaBlu-deepBlue mb-8 text-center"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -341,7 +341,7 @@ const Contact: React.FC = () => {
                   allowFullScreen 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="EqwaBlue Headquarters"
+                  title="EqwaBlu Headquarters"
                 ></iframe>
               </div>
             </motion.div>
